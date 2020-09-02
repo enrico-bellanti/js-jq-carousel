@@ -11,10 +11,13 @@
 // Consiglio del giorno:
 // Come sempre è importante usare la documentazione di jQuery per scoprire/rinfrescare memoria sulle funzioni che potrebbero esserci utili.
 
+
 // creo la funzione document ready per fare in modo che il js sia caricato alla fine
 // seleziono le frecce in modo che al click facciano qualcosa
 $(document).ready(function () {
 
+  // assegno valori a img e valBullet
+  assignValue();
 
   $(".next").click(function () {
     getNextImg();
@@ -53,6 +56,46 @@ function getNextImg() {
     var nextCircle = circleActive.next();
     nextCircle.addClass("active");
   }
+}
+
+
+
+// fai che quando clicco il pallino mi diventa blu e l'altro diventa bianco
+
+$(".nav i").click(function() {
+  if($(".nav i").hasClass("active")){
+    $(".nav i").removeClass("active");
+    $("img").removeClass("active");
+    $(this).addClass("active");
+    var valBullet = $(this).attr('value');
+    var img = $("img")[value=valBullet-1];
+    img.classList.add("active");
+  }
+});
+
+// funzione che parte dal primo img e dal primo bullet e assegnare valori uguali a entrambe
+function assignValue() {
+
+  var i = 1;
+  var bullet = $(".nav i.first");
+  var img = $("img.first");
+  var finalBullet = false;
+
+  while (finalBullet == false) {
+
+    bullet.attr('value', i);
+    img.attr('value', i);
+
+    if (bullet.hasClass("last")) {
+      finalBullet = true;
+    }
+
+    bullet = bullet.next();
+    img = img.next();
+
+    i++;
+  }
+
 }
 
 // funzione per scorrere all'indietro le immagini
