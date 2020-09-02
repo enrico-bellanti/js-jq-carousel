@@ -23,7 +23,21 @@ $(document).ready(function () {
 
   $(".prev").click(function () {
     getPrevImg();
-  })
+  });
+
+// ho usato tasto "z" e tasto "x" per muovere avanti e indietro le img
+// perche' i tasti freccia non funzionano
+$(document).keypress(function(event) {
+      console.log(event.keyCode);
+      if (event.which == 122)
+      {
+          getPrevImg();
+      }
+      else if (event.which == 120)
+      {
+          getNextImg();
+      }
+  });
 
 // funzione per scorrere avanti le immagini
 function getNextImg() {
