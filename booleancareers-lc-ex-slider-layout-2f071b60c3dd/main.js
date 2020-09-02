@@ -13,32 +13,51 @@
 
 // creo la funzione document ready per fare in modo che il js sia caricato alla fine
 // seleziono le frecce in modo che al click facciano qualcosa
-
 $(document).ready(function () {
 
-  var arrowRight = $(".next");
-  var arrowLeft = $(".prev");
 
-  arrowRight.click(function () {
-    var imgActive = $("img.active");
-    imgActive.removeClass("active");
-    if (imgActive.hasClass("last")) {
-      $("img.first").addClass("active");
-    }else {
-      var nextImg = imgActive.next();
-      nextImg.addClass("active");
-    }
+  $(".next").click(function () {
+    getNextImg();
+  });
+
+
+  $(".prev").click(function () {
+    getPrevImg();
   })
-  arrowLeft.click(function () {
-    var imgActive = $("img.active");
-    imgActive.removeClass("active");
-    if (imgActive.hasClass("first")) {
-      $("img.last").addClass("active");
-    }else {
-      var nextImg = imgActive.prev();
-      nextImg.addClass("active");
-    }
-  })
+
+// funzione per scorrere avanti le immagini
+function getNextImg() {
+  var imgActive = $("img.active");
+  imgActive.removeClass("active");
+  var circleActive = $(".nav i.active");
+  circleActive.removeClass("active")
+  if (imgActive.hasClass("last") && circleActive.hasClass("last")) {
+    $("img.first").addClass("active");
+    $(".nav i.first").addClass("active");
+  }else {
+    var nextImg = imgActive.next();
+    nextImg.addClass("active");
+    var nextCircle = circleActive.next();
+    nextCircle.addClass("active");
+  }
+}
+
+// funzione per scorrere all'indietro le immagini
+function getPrevImg() {
+  var imgActive = $("img.active");
+  imgActive.removeClass("active");
+  var circleActive = $(".nav i.active");
+  circleActive.removeClass("active")
+  if (imgActive.hasClass("first") && circleActive.hasClass("first")) {
+    $("img.last").addClass("active");
+    $(".nav i.last").addClass("active");
+  }else {
+    var nextImg = imgActive.prev();
+    nextImg.addClass("active");
+    var nextCircle = circleActive.prev();
+    nextCircle.addClass("active");
+  }
+}
 
 
 });
