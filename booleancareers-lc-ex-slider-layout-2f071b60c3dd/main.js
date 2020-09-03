@@ -13,12 +13,53 @@
 
 
 // creo la funzione document ready per fare in modo che il js sia caricato alla fine
-// seleziono le frecce in modo che al click facciano qualcosa
 $(document).ready(function () {
 
   // assegno valori a img e valBullet
   assignValue();
 
+  // fai che quando clicco il pallino mi diventa blu e l'altro diventa bianco
+  // controllo quale immagine ha lo stesso valore e assegno la classe active
+  $(".nav i").click(function() {
+    if($(".nav i").hasClass("active")){
+      $(".nav i").removeClass("active");
+      $("img").removeClass("active");
+      $(this).addClass("active");
+      var valBullet = $(this).attr('value');
+      // var img = $("img")[value=valBullet-1];
+      var img = $("img[value="+valBullet+"]");
+      console.log(img)
+      // img.classList.add("active");
+      img.addClass("active");
+    }
+  });
+
+// funzione che parte dal primo img e dal primo bullet e assegnare valori uguali a entrambe
+function assignValue() {
+
+  var i = 1;
+  var bullet = $(".nav i.first");
+  var img = $("img.first");
+  var finalBullet = false;
+
+  while (finalBullet == false) {
+
+    bullet.attr('value', i);
+    img.attr('value', i);
+
+    if (bullet.hasClass("last")) {
+      finalBullet = true;
+    }
+
+    bullet = bullet.next();
+    img = img.next();
+
+    i++;
+  }
+
+}
+
+  // seleziono le frecce in modo che al click facciano qualcosa
   $(".next").click(function () {
     getNextImg();
   });
@@ -58,45 +99,6 @@ function getNextImg() {
   }
 }
 
-
-
-// fai che quando clicco il pallino mi diventa blu e l'altro diventa bianco
-
-$(".nav i").click(function() {
-  if($(".nav i").hasClass("active")){
-    $(".nav i").removeClass("active");
-    $("img").removeClass("active");
-    $(this).addClass("active");
-    var valBullet = $(this).attr('value');
-    var img = $("img")[value=valBullet-1];
-    img.classList.add("active");
-  }
-});
-
-// funzione che parte dal primo img e dal primo bullet e assegnare valori uguali a entrambe
-function assignValue() {
-
-  var i = 1;
-  var bullet = $(".nav i.first");
-  var img = $("img.first");
-  var finalBullet = false;
-
-  while (finalBullet == false) {
-
-    bullet.attr('value', i);
-    img.attr('value', i);
-
-    if (bullet.hasClass("last")) {
-      finalBullet = true;
-    }
-
-    bullet = bullet.next();
-    img = img.next();
-
-    i++;
-  }
-
-}
 
 // funzione per scorrere all'indietro le immagini
 function getPrevImg() {
