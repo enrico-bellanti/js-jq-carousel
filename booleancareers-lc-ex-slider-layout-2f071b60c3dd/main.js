@@ -25,11 +25,8 @@ $(document).ready(function () {
       $(".nav i").removeClass("active");
       $("img").removeClass("active");
       $(this).addClass("active");
-      var valBullet = $(this).attr('value');
-      // var img = $("img")[value=valBullet-1];
-      var img = $("img[value="+valBullet+"]");
-      console.log(img)
-      // img.classList.add("active");
+      var valBullet = $(this).attr('data-slide');
+      var img = $("img[data-slide="+valBullet+"]");
       img.addClass("active");
     }
   });
@@ -44,8 +41,8 @@ function assignValue() {
 
   while (finalBullet == false) {
 
-    bullet.attr('value', i);
-    img.attr('value', i);
+    bullet.attr('data-slide', i);
+    img.attr('data-slide', i);
 
     if (bullet.hasClass("last")) {
       finalBullet = true;
@@ -70,8 +67,8 @@ function assignValue() {
   });
 
 // inserisco funziona che permette di vedere le img con le frecce della tastiera
-$(document).keydown(function(event) {
-      console.log(event.keyCode);
+$(document).keydown(
+  function(event) {
       if (event.which == 37)
       {
           getPrevImg();
